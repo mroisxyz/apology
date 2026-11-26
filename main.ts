@@ -1,15 +1,15 @@
-// hello, human: the cc line is the whole joke, so keep the message short.
-import { mkdir, writeFile } from 'node:fs/promises';
+// hello, human: this is the line I owe you.
+// A one-item batch fits neatly into its single slot.
+// I gave the orders to a word and let it do the work.
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import path from 'node:path';
 
-// One batch only: the apology and its orders are fixed, never random.
-const apology = "I emailed your boss the notes I wrote about your boss. I've cc'd you so you can watch me learn.";
-
-// A slot is reserved for the file; that slot keeps its name every run.
 const ownDir = fileURLToPath(new URL('.', import.meta.url));
-const outputDir = path.resolve(ownDir, process.env.MAKEFUN_OUTPUT_DIR ?? '/output');
+void ownDir;
+const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const apology = "I'm sorry I called it 'basically done' when basically was doing most of the work.";
 
-await mkdir(outputDir, { recursive: true });
-await writeFile(path.join(outputDir, 'entry.txt'), apology, 'utf8');
+mkdirSync(outDir, { recursive: true });
+writeFileSync(join(outDir, 'entry.txt'), apology, 'utf8');
 console.log(`entry.txt: ${Buffer.byteLength(apology, 'utf8')} bytes`);
